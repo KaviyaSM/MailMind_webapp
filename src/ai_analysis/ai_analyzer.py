@@ -22,7 +22,7 @@ logger = get_logger(__name__)
 
 
 
-os.environ["LANGCHAIN_TRACING_V2"] = "true"  
+
 
 @dataclass
 class EmailAnalysis:
