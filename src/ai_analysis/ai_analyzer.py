@@ -49,8 +49,11 @@ class AIEmailAnalyzer:
         self._create_analysis_tables()
         
     def _setup_ai_model(self):
-        """Initialize Gemini 2.5 Flash model with LangChain"""
         try:
+            import os
+            from src.utils.config_loader import config
+            os.environ["GOOGLE_API_KEY"] = config.GOOGLE_API_KEY
+
             self.llm = ChatGoogleGenerativeAI(
                 model="gemini-2.5-flash",
                 temperature=0.1,
@@ -58,7 +61,7 @@ class AIEmailAnalyzer:
                 timeout=30,
                 max_retries=3,
             )
-            logger.info("✅ Gemini 2.5 Flash model initialized successfully")
+            logger.info("✅ Gemini model initialized successfully")
         except Exception as e:
             logger.error(f"❌ Failed to initialize Gemini model: {e}")
             raise
