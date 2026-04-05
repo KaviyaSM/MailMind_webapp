@@ -1,5 +1,6 @@
 # src/ai_analysis/email_reply.py
-
+from src.utils.config_loader import config
+import os
 import base64
 import email.mime.text
 import email.mime.multipart
@@ -43,18 +44,24 @@ class AIEmailReply:
             raise
     
     def _setup_ai_model(self):
-        """Initialize AI model for reply generation"""
         try:
-            self.llm = ChatGoogleGenerativeAI(
-                model="gemini-2.5-flash",
-                temperature=0.3,  # Slightly higher for more creative replies
-                max_tokens=1024,
-                timeout=30,
-            )
+            import os
+            from src.utils.config_loader import config
+
+             # Set API key from Streamlit secrets
+             os.environ["GOOGLE_API_KEY"] = config.GOOGLE_API_KEY
+
+              self.llm = ChatGoogleGenerativeAI(
+                  model="gemini-2.5-flash",
+                  temperature=0.3,
+                  max_tokens=1024,
+                  timeout=30,
+              )
             logger.info("✅ AI model for reply generation initialized")
-        except Exception as e:
-            logger.error(f"❌ Failed to initialize AI model: {e}")
-            raise
+
+          except Exception as e:
+              logger.error(f"❌ Failed to initialize AI model: {e}")
+           raise
     
     def _create_reply_tables(self):
         """Create tables for tracking sent replies"""
