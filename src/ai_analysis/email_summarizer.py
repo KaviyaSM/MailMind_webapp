@@ -1,4 +1,5 @@
 # src/ai_analysis/email_summarizer.py
+from src.utils.config_loader import config
 
 import os
 import json
@@ -119,14 +120,20 @@ class AIEmailSummarizer:
     def _setup_ai_model(self):
         """Initialize Gemini 2.5 Flash model with LangChain"""
         try:
-            self.llm = ChatGoogleGenerativeAI(
-                model="gemini-2.5-flash",
-                temperature=0.1,  # Low temperature for consistent summaries
-                max_tokens=2048,
-                timeout=30,
-                max_retries=3,
-            )
-            logger.info("✅ Gemini 2.0 Flash model initialized for summarization")
+            import os
+            from src.utils.config_loader import config
+
+             # Set API key from Streamlit secrets
+             os.environ["GOOGLE_API_KEY"] = config.GOOGLE_API_KEY
+
+             self.llm = ChatGoogleGenerativeAI(
+                 model="gemini-2.5-flash",
+                 temperature=0.1,
+                 max_tokens=2048,
+                 timeout=30,
+                 max_retries=3,
+             )
+            logger.info("✅ Gemini model initialized for summarization")
         except Exception as e:
             logger.error(f"❌ Failed to initialize Gemini model: {e}")
             raise
