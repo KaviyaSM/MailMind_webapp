@@ -124,9 +124,9 @@ class AIEmailSummarizer:
             from src.utils.config_loader import config
 
              # Set API key from Streamlit secrets
-             os.environ["GOOGLE_API_KEY"] = config.GOOGLE_API_KEY
+            os.environ["GOOGLE_API_KEY"] = config.GOOGLE_API_KEY
 
-             self.llm = ChatGoogleGenerativeAI(
+            self.llm = ChatGoogleGenerativeAI(
                  model="gemini-2.5-flash",
                  temperature=0.1,
                  max_tokens=2048,
