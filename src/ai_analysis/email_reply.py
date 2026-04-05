@@ -49,9 +49,9 @@ class AIEmailReply:
             from src.utils.config_loader import config
 
              # Set API key from Streamlit secrets
-             os.environ["GOOGLE_API_KEY"] = config.GOOGLE_API_KEY
+            os.environ["GOOGLE_API_KEY"] = config.GOOGLE_API_KEY
 
-              self.llm = ChatGoogleGenerativeAI(
+            self.llm = ChatGoogleGenerativeAI(
                   model="gemini-2.5-flash",
                   temperature=0.3,
                   max_tokens=1024,
@@ -59,9 +59,9 @@ class AIEmailReply:
               )
             logger.info("✅ AI model for reply generation initialized")
 
-          except Exception as e:
+        except Exception as e:
               logger.error(f"❌ Failed to initialize AI model: {e}")
-           raise
+              raise
     
     def _create_reply_tables(self):
         """Create tables for tracking sent replies"""
