@@ -1,0 +1,19 @@
+langchain-google-genai    # Gemini integration
+google-generativeai       # Google AI SDK
+python-docx              # Word document processing
+openpyxl                 # Excel file handling
+PyPDF2                   # PDF processing
+python-pptx              # PowerPoint processing
+Pillow                  
+ 
+# Web & API
+streamlit                # Dashboard framework
+google-api-python-client # Gmail API client
+google-auth-oauthlib     # OAuth authentication
+requests                 # HTTP operations
+ 
+# Data & Storage
+pandas                   # Data manipulation
+numpy                    # Numerical operations
+beautifulsoup4
+dotenv
